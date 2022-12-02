@@ -7,7 +7,7 @@ import (
 	"github.com/dosadczuk/aoc/2022/pkg/io"
 )
 
-func TestMain(runner *testing.T) {
+func TestSolve(runner *testing.T) {
 	tt := []struct {
 		testname string
 		filepath string

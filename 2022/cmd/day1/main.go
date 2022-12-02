@@ -14,5 +14,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Result: %d\n", day1.Solve(input))
+	fmt.Printf("Result (1): %d\n", day1.Solve1(input))
+	fmt.Printf("Result (2): %d\n", day1.Solve2(input))
 }
