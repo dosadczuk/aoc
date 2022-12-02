@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/dosadczuk/aoc/2022/internal/day1"
-	"github.com/dosadczuk/aoc/2022/pkg/io"
+	"github.com/dosadczuk/aoc/2022/internal/io"
+	"github.com/dosadczuk/aoc/2022/pkg/day1"
 )
 
 func main() {

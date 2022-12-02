@@ -4,7 +4,7 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/dosadczuk/aoc/2022/pkg/math"
+	"github.com/dosadczuk/aoc/2022/internal/math"
 )
 
 func Solve1(input []string) int {

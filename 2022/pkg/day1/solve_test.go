@@ -3,8 +3,8 @@ package day1_test
 import (
 	"testing"
 
-	"github.com/dosadczuk/aoc/2022/internal/day1"
-	"github.com/dosadczuk/aoc/2022/pkg/io"
+	"github.com/dosadczuk/aoc/2022/internal/io"
+	"github.com/dosadczuk/aoc/2022/pkg/day1"
 )
 
 func TestSolve1(runner *testing.T) {
