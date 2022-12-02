@@ -41,7 +41,11 @@ func TestSolve1(runner *testing.T) {
 	}
 
 	for _, tc := range tt {
+		tc := tc
+
 		runner.Run(tc.testname, func(t *testing.T) {
+			t.Parallel()
+
 			input, err := io.ReadLines(tc.filepath)
 			if err != nil {
 				t.Error(err)
@@ -89,7 +93,11 @@ func TestSolve2(runner *testing.T) {
 	}
 
 	for _, tc := range tt {
+		tc := tc
+
 		runner.Run(tc.testname, func(t *testing.T) {
+			t.Parallel()
+
 			input, err := io.ReadLines(tc.filepath)
 			if err != nil {
 				t.Error(err)

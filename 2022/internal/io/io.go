@@ -21,5 +21,5 @@ func ReadLines(filepath string) ([]string, error) {
 		lines = append(lines, s.Text())
 	}
 
-	return lines, nil
+	return lines, s.Err()
 }
