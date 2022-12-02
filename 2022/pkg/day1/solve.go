@@ -1,9 +1,9 @@
 package day1
 
 import (
-	"sort"
 	"strconv"
 
+	"github.com/dosadczuk/aoc/2022/internal/ds"
 	"github.com/dosadczuk/aoc/2022/internal/math"
 )
 
@@ -32,11 +32,11 @@ func Solve2(input []string) int {
 	// How many Calories are those Elves carrying in total?
 
 	sum := 0
-	vals := []int{}
+	vals := ds.NewIntMaxHeap()
 
 	for _, entry := range input {
 		if entry == "" { // new Elf is coming
-			vals = append(vals, sum)
+			vals.Push(sum)
 			sum = 0
 
 			continue
@@ -45,17 +45,11 @@ func Solve2(input []string) int {
 		val, _ := strconv.Atoi(entry)
 		sum += val
 	}
-
-	// add last Elf
-	vals = append(vals, sum)
-
-	sort.Slice(vals, func(i, j int) bool {
-		return vals[j] < vals[i] // sort descending
-	})
+	vals.Push(sum) // add last Elf
 
 	sum = 0
-	for i := 0; i < math.MinInt(3, len(vals)); i++ {
-		sum += vals[i]
+	for i := 1; i <= 3 && !vals.Empty(); i++ {
+		sum += vals.Pop()
 	}
 
 	return sum
