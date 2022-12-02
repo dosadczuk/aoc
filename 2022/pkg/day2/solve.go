@@ -39,12 +39,12 @@ var (
 var (
 	scoreForShape = map[shape]int{rock: 1, paper: 2, scissors: 3}
 
-	// scoreForResult is the mapping for the shape and the shape.
+	// scoreForRound is the mapping for the shape and the shape.
 	//
 	// It answers the question:
 	// "What's the result of the battle between me, with the shape,
 	// and my opponent with the shape."
-	scoreForResult = map[shape]map[shape]int{
+	scoreForRound = map[shape]map[shape]int{
 		rock:     {rock: draw, paper: lose, scissors: win},
 		paper:    {rock: win, paper: draw, scissors: lose},
 		scissors: {rock: lose, paper: win, scissors: draw},
@@ -61,7 +61,7 @@ func Solve1(input []string) int {
 		ur := urShape[round[0]]
 
 		score := scoreForShape[my]
-		score += scoreForResult[my][ur]
+		score += scoreForRound[my][ur]
 
 		total += score
 	}
@@ -75,12 +75,12 @@ func Solve2(input []string) int {
 	for _, entry := range input {
 		round := strings.Split(entry, " ")
 
-		res := myResult[round[1]]
+		result := myResult[round[1]]
 
 		ur := urShape[round[0]]
-		my := shapeForResult[res][ur]
+		my := shapeForResult[result][ur]
 
-		score := res
+		score := result
 		score += scoreForShape[my]
 
 		total += score
