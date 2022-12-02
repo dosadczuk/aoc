@@ -1,6 +1,11 @@
-package main
+package day2_test
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/dosadczuk/aoc/2022/internal/day2"
+	"github.com/dosadczuk/aoc/2022/pkg/io"
+)
 
 func TestMain(runner *testing.T) {
 	tt := []struct {
@@ -17,16 +22,14 @@ func TestMain(runner *testing.T) {
 
 	for _, tc := range tt {
 		runner.Run(tc.testname, func(t *testing.T) {
-			input, err := readInputFile(tc.filepath)
+			input, err := io.ReadLines(tc.filepath)
 			if err != nil {
 				t.Error(err)
 				return
 			}
 
-			given := totalScoreForStrategy(input)
-			if given != tc.expected {
-				t.Errorf("\nScore: %d\nExpected: %d\n\n", given, tc.expected)
-				return
+			if given := day2.Solve(input); given != tc.expected {
+				t.Errorf("Given: %d, Expected: %d\n", given, tc.expected)
 			}
 		})
 	}

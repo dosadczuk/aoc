@@ -1,12 +1,6 @@
-package main
+package day2
 
-import (
-	"bufio"
-	"fmt"
-	"log"
-	"os"
-	"strings"
-)
+import "strings"
 
 type shape int
 
@@ -36,16 +30,7 @@ var (
 	}
 )
 
-func main() {
-	input, err := readInputFile("submit.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Printf("Score: %d\n", totalScoreForStrategy(input))
-}
-
-func totalScoreForStrategy(input []string) int {
+func Solve(input []string) int {
 	total := 0
 
 	for _, entry := range input {
@@ -61,22 +46,4 @@ func totalScoreForStrategy(input []string) int {
 	}
 
 	return total
-}
-
-func readInputFile(filepath string) ([]string, error) {
-	file, err := os.Open(filepath)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-
-	var data []string
-	for scanner.Scan() {
-		data = append(data, scanner.Text())
-	}
-
-	return data, nil
 }
