@@ -2,13 +2,13 @@ package ds
 
 // Set is set data structure that contains int values.
 type Set[T comparable] struct {
-	vals map[T]bool
+	vals map[T]any
 }
 
 // NewSet creates new instance of Set.
 func NewSet[T comparable]() *Set[T] {
 	return &Set[T]{
-		vals: make(map[T]bool),
+		vals: make(map[T]any),
 	}
 }
 
@@ -27,7 +27,7 @@ func (s *Set[T]) Vals() []T {
 
 // Add adds the value to the set.
 func (s *Set[T]) Add(v T) {
-	s.vals[v] = true
+	s.vals[v] = nil
 }
 
 // Has checks if the value exists in the set.
@@ -39,6 +39,11 @@ func (s *Set[T]) Has(v T) bool {
 // Remove removes the value from the set.
 func (s *Set[T]) Remove(v T) {
 	delete(s.vals, v)
+}
+
+// Empty checks if the set is empty.
+func (s *Set[T]) Empty() bool {
+	return s.Len() == 0
 }
 
 // Len returns the length of the values.

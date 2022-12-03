@@ -7,43 +7,59 @@ import (
 )
 
 func Solve1(input []string) int {
-	priority := 0
+	total := 0
 
 	for _, entry := range input {
 		var half int = len(entry) / 2
 
-		l := getCharStats(entry[:half])
-		r := getCharStats(entry[half:])
+		chars := ds.SetIntersection(
+			getUniqueChars(entry[:half]), // left half
+			getUniqueChars(entry[half:]), // right half
+		)
 
-		i := ds.SetIntersection(l, r)
-
-		p := 0
-		for _, v := range i.Vals() {
-			if unicode.IsLower(v) {
-				// Lowercase item types a through z have priorities 1 through 26.
-				p += int(v - 'a' + 01)
-			} else {
-				// Uppercase item types A through Z have priorities 27 through 52.
-				p += int(v - 'A' + 27)
-			}
-		}
-
-		priority += p
+		total += getCharPriority(chars)
 	}
 
-	return priority
+	return total
 }
 
 func Solve2(input []string) int {
-	return 0
-}
+	total := 0
 
-func getCharStats(value string) *ds.Set[rune] {
-	stats := ds.NewSet[rune]()
+	chars := ds.NewSet[rune]()
+	for i, entry := range input {
+		if chars.Empty() { // is new group
+			chars = getUniqueChars(entry)
+		} else {
+			chars = ds.SetIntersection(getUniqueChars(entry), chars)
+		}
 
-	for _, char := range value {
-		stats.Add(char)
+		if ord := i + 1; ord%3 == 0 || ord == len(input) {
+			total += getCharPriority(chars)
+			chars = ds.NewSet[rune]()
+		}
 	}
 
-	return stats
+	return total
+}
+
+func getUniqueChars(v string) *ds.Set[rune] {
+	set := ds.NewSet[rune]()
+	for _, char := range v {
+		set.Add(char)
+	}
+
+	return set
+}
+
+func getCharPriority(s *ds.Set[rune]) int {
+	for _, v := range s.Vals() { // first value only
+		if unicode.IsLower(v) {
+			return int(v - 'a' + 01) // priority 01 through 26
+		} else {
+			return int(v - 'A' + 27) // priority 27 through 52
+		}
+	}
+
+	return 0 // default int
 }

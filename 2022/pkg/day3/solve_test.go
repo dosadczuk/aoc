@@ -40,8 +40,6 @@ func TestSolve1(runner *testing.T) {
 }
 
 func TestSolve2(runner *testing.T) {
-    runner.Skip()
-
 	tt := []struct {
 		testname string
 		filepath string
@@ -50,7 +48,7 @@ func TestSolve2(runner *testing.T) {
 		{
 			testname: "Sample from website",
 			filepath: "testdata/tc1_sample_from_website.txt",
-			expected: -1,
+			expected: 70,
 		},
 	}
 

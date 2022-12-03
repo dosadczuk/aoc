@@ -15,4 +15,5 @@ func main() {
 	}
 
 	fmt.Printf("Result (1): %d\n", day3.Solve1(input))
+	fmt.Printf("Result (2): %d\n", day3.Solve2(input))
 }
