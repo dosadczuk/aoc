@@ -1,54 +1,57 @@
 package ds
 
-import "container/heap"
+import (
+	"container/heap"
+	"golang.org/x/exp/constraints"
+)
 
-// IntMaxHeap is max heap with int values.
-type IntMaxHeap struct {
-	vals *intMaxHeap
+// MaxHeap is max heap with int values.
+type MaxHeap[T constraints.Ordered] struct {
+	vals *maxHeap[T]
 }
 
-// NewIntMaxHeap creates new instance of IntMaxHeap.
-func NewIntMaxHeap() *IntMaxHeap {
-	return &IntMaxHeap{
-		vals: &intMaxHeap{},
+// NewMaxHeap creates new instance of MaxHeap.
+func NewMaxHeap[T constraints.Ordered]() *MaxHeap[T] {
+	return &MaxHeap[T]{
+		vals: &maxHeap[T]{},
 	}
 }
 
 // Push pushes new value onto the heap.
-func (h *IntMaxHeap) Push(v int) {
+func (h *MaxHeap[T]) Push(v T) {
 	heap.Push(h.vals, v)
 }
 
 // Pop removes and returns the maximum value from the heap.
 //
 // If heap is empty, returns default value of int.
-func (h *IntMaxHeap) Pop() int {
-	var v int
+func (h *MaxHeap[T]) Pop() T {
+	var v T
 	if !h.Empty() {
-		v = heap.Pop(h.vals).(int)
+		v = heap.Pop(h.vals).(T)
 	}
 
 	return v
 }
 
 // Empty checks if the heap is empty.
-func (h *IntMaxHeap) Empty() bool {
+func (h *MaxHeap[T]) Empty() bool {
 	return h.vals.Len() == 0
 }
 
-// intMaxHeap is the implementation of heap.Interface.
-type intMaxHeap []int
+// maxHeap is the implementation of heap.Interface.
+type maxHeap[T constraints.Ordered] []T
 
-// Assert that intMaxHeap implements heap.Interface.
-var _ heap.Interface = (*intMaxHeap)(nil)
+// Assert that maxHeap implements heap.Interface.
+var _ heap.Interface = (*maxHeap[int])(nil)
 
 // Push pushes the element v onto the heap.
-func (h *intMaxHeap) Push(v any) {
-	*h = append(*h, v.(int))
+func (h *maxHeap[T]) Push(v any) {
+	*h = append(*h, v.(T))
 }
 
 // Pop removes and returns the maximum element from the heap.
-func (h *intMaxHeap) Pop() any {
+func (h *maxHeap[T]) Pop() any {
 	old := *h
 	n := len(old)
 	v := old[n-1]
@@ -59,16 +62,16 @@ func (h *intMaxHeap) Pop() any {
 
 // Less reports whether the element with index i
 // must sort before the element with index j.
-func (h *intMaxHeap) Less(i, j int) bool {
+func (h *maxHeap[T]) Less(i, j int) bool {
 	return (*h)[i] > (*h)[j]
 }
 
 // Swap swaps the elements with indexes i and j.
-func (h *intMaxHeap) Swap(i, j int) {
+func (h *maxHeap[T]) Swap(i, j int) {
 	(*h)[i], (*h)[j] = (*h)[j], (*h)[i]
 }
 
 // Len is the number of elements in the collection.
-func (h *intMaxHeap) Len() int {
+func (h *maxHeap[T]) Len() int {
 	return len(*h)
 }

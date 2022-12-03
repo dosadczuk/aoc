@@ -32,7 +32,7 @@ func Solve2(input []string) int {
 	// How many Calories are those Elves carrying in total?
 
 	sum := 0
-	vals := ds.NewIntMaxHeap()
+	vals := ds.NewMaxHeap[int]()
 
 	for _, entry := range input {
 		if entry == "" { // new Elf is coming
