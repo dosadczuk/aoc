@@ -44,12 +44,12 @@ func Solve2(input []string) int {
 }
 
 func getUniqueChars(v string) *ds.Set[rune] {
-	set := ds.NewSet[rune]()
+	chars := ds.NewSet[rune]()
 	for _, char := range v {
-		set.Add(char)
+		chars.Add(char)
 	}
 
-	return set
+	return chars
 }
 
 func getCharPriority(s *ds.Set[rune]) int {

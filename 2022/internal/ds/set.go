@@ -54,7 +54,6 @@ func (s *Set[T]) Len() int {
 // SetIntersection returns the intersection of the two sets.
 func SetIntersection[T comparable](a, b *Set[T]) *Set[T] {
 	s := NewSet[T]()
-
 	for v := range a.vals {
 		if b.Has(v) {
 			s.Add(v)
