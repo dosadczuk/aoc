@@ -8,8 +8,6 @@ import (
 )
 
 func Solve1(input []string) int {
-	// How many Calories are those Elves carrying in total?
-
 	sum := 0
 	max := 0
 
@@ -29,8 +27,6 @@ func Solve1(input []string) int {
 }
 
 func Solve2(input []string) int {
-	// How many Calories are those Elves carrying in total?
-
 	sum := 0
 	vals := ds.NewMaxHeap[int]()
 
