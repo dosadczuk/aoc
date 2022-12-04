@@ -15,5 +15,5 @@ func main() {
 	}
 
 	fmt.Printf("Result (1): %d\n", day4.Solve1(input))
-	//fmt.Printf("Result (2): %d\n", day4.Solve2(input))
+	fmt.Printf("Result (2): %d\n", day4.Solve2(input))
 }
