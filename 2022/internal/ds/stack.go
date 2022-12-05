@@ -6,6 +6,11 @@ func NewStack[T any]() *Stack[T] {
 	return &Stack[T]{}
 }
 
+func NewStackWithSizeOf[T any](size int) *Stack[T] {
+	s := make(Stack[T], 0, size)
+	return &s
+}
+
 func (s *Stack[T]) Push(v T) {
 	*s = append(*s, v)
 }
