@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/dosadczuk/aoc/2022/internal/ds"
 	"github.com/dosadczuk/aoc/2022/internal/math"
+	"github.com/dosadczuk/go-ds/stack"
 )
 
 func Solve1(input []string) string {
@@ -31,7 +31,7 @@ func Solve2(input []string) string {
 		qty, srcIdx, tgtIdx := parseAction(entry)
 
 		src, tgt := stacks[srcIdx], stacks[tgtIdx]
-		tmp := ds.NewStackWithSizeOf[string](qty)
+		tmp := stack.NewStackWithSize[string](uint(qty))
 
 		for ; qty > 0 && !src.Empty(); qty -= 1 {
 			tmp.Push(src.Pop())
@@ -64,12 +64,12 @@ func Solve2(input []string) string {
 //		  Stack{ M, C, D },
 //		  Stack{ P },
 //		]
-func parseStacks(input *[]string) []*ds.Stack[string] {
+func parseStacks(input *[]string) []*stack.Stack[string] {
 	board := parseBoard(input)
 
-	stacks := make([]*ds.Stack[string], len(board[0])/4+1)
+	stacks := make([]*stack.Stack[string], len(board[0])/4+1)
 	for i := range stacks {
-		stacks[i] = ds.NewStack[string]()
+		stacks[i] = stack.NewStack[string]()
 	}
 
 	for row := len(board) - 2; row >= 0; row-- {
@@ -162,7 +162,7 @@ func parseAction(action string) (qty, src, tgt int) {
 
 // result returns the result expected by the input.
 // It peeks and concatenates top element from each stack.
-func result(stacks []*ds.Stack[string]) string {
+func result(stacks []*stack.Stack[string]) string {
 	var out strings.Builder
 	for _, s := range stacks {
 		out.WriteString(s.Peek())
